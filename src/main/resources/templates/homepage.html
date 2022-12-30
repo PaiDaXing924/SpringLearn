@@ -8,8 +8,14 @@
 
 <div>
     <h1 align="center">首页</h1>
-    <a>用户名：[[${user.userName}]]</a>
-    <a th:href="@{/logout}">注销</a>
+    <h3 align="center">用户名：[[${user.userName}]]</h3>
+    <h3 align="center">权限测试链接</h3>
+    <div align="center">
+        <a th:href="@{/user/list}">获取用户信息</a>
+        <a th:href="@{/user/add}">新增用户</a>
+        <a th:href="@{/user/delete}">删除用户</a>
+    </div>
+    <a style="text-align: center" th:href="@{/logout}">注销</a>
 
 
 </div>

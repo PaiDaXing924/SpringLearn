@@ -54,9 +54,9 @@ public class LoginController {
         return "homepage";
     }
 
-//    @RequestMapping("/logout")
-//    public String logout() {
-//        return "redirect:/tologin";
-//    }
+    @GetMapping("/403")
+    public String forbid() {
+        return "403";
+    }
 
 }

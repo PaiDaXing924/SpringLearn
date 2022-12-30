@@ -4,6 +4,7 @@ import com.zhang.shiro.ShiroRealm;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -44,7 +45,7 @@ public class ShiroConfig {
     public SecurityManager SecurityManager() {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         defaultWebSecurityManager.setRealm(shiroRealm());
-//        defaultWebSecurityManager.setRememberMeManager(rememberMeManager());
+        defaultWebSecurityManager.setRememberMeManager(rememberMeManager());
         return defaultWebSecurityManager;
     }
 
@@ -54,30 +55,37 @@ public class ShiroConfig {
         return shiroRealm;
     }
 
-//    /**
-//     * Cookie对象
-//     * @return
-//     */
-//    public SimpleCookie rememberMeCookie() {
-//        SimpleCookie cookie = new SimpleCookie("Remeberme");
-//        cookie.setMaxAge(86400);
-//        return cookie;
-//    }
-//
-//    /**
-//     * Cookie管理对象
-//     * @return
-//     */
-//    public CookieRememberMeManager rememberMeManager() {
-//        CookieRememberMeManager cookieManager = new CookieRememberMeManager();
-//        cookieManager.setCookie(rememberMeCookie());
-//        cookieManager.setCipherKey(Base64.decode("3AvVhmFLUs0KTA3Kprsdag=="));
-//        return cookieManager;
-//    }
+    /**
+     * Cookie对象
+     * @return
+     */
+    public SimpleCookie rememberMeCookie() {
+        SimpleCookie cookie = new SimpleCookie("Remeberme");
+        cookie.setMaxAge(86400);
+        return cookie;
+    }
+
+    /**
+     * Cookie管理对象
+     * @return
+     */
+    public CookieRememberMeManager rememberMeManager() {
+        CookieRememberMeManager cookieManager = new CookieRememberMeManager();
+        cookieManager.setCookie(rememberMeCookie());
+        cookieManager.setCipherKey(Base64.decode("3AvVhmFLUs0KTA3Kprsdag=="));
+        return cookieManager;
+    }
 
     @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
+    }
+
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
     }
 
 }

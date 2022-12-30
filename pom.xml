@@ -31,11 +31,19 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.2.3.RELEASE</version>
             <exclusions>
+<!--                <exclusion>-->
+<!--                    <groupId>org.springframework.boot</groupId>-->
+<!--                    <artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--                </exclusion>-->
+
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                    <artifactId>spring-boot-starter</artifactId>
                 </exclusion>
+
+
             </exclusions>
+
         </dependency>
         <!--test测试类-->
         <dependency>
@@ -43,7 +51,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
-        <!--springboot启动器-->
+        <!--mysql启动器-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -91,9 +99,14 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
+        <!--undertow容器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
     </dependencies>
 
-    <packaging>war</packaging>
+<!--    <packaging>war</packaging>-->
 
     <build>
         <plugins>
@@ -104,7 +117,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.4.3</version>
+<!--                <version>2.4.3</version>-->
             </plugin>
         </plugins>
 
