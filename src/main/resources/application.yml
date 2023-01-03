@@ -67,6 +67,16 @@ spring:
 #    suffix: .html
     cache: false
 
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+
 mybatis:
   # type-aliases扫描路径
   type-aliases-package: com.zhang.pojo

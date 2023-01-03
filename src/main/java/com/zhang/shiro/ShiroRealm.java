@@ -36,7 +36,7 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         String userName = user.getUserName();
-        System.out.println("用户" + userName + "获取权限-----ShiroRealm.doGetAuthorizationInfo");
+        log.info("用户" + userName + "获取权限-----ShiroRealm.doGetAuthorizationInfo");
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 
         // 获取用户角色集
@@ -51,7 +51,7 @@ public class ShiroRealm extends AuthorizingRealm {
         Set<String> preSet = new HashSet<String>();
         for (Permission pre:
         preList) {
-            preSet.add(pre.getUrl());
+            preSet.add(pre.getName());
         }
 
         SimpleAuthorizationInfo authorInfo = new SimpleAuthorizationInfo();
@@ -66,7 +66,7 @@ public class ShiroRealm extends AuthorizingRealm {
         String username = (String) token.getPrincipal();
         String password = new String((char[]) token.getCredentials());
 
-        log.info("开始认证用户："+username);
+        log.info("用户" + username + "开始认证-----ShiroRealm.doGetAuthenticationInfo");
         User user = findUser.findUser(username);
 
         if (user == null) {
