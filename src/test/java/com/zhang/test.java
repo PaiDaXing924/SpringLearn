@@ -1,3 +1,5 @@
+package com.zhang;
+
 public class test {
 
     public static void main(String[] args) {
